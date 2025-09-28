@@ -2,39 +2,64 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* Heritage Guide Design System - Monastery inspired palette 
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Heritage inspired color palette */
+    --background: 45 20% 97%;
+    --foreground: 25 15% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 25 15% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 25 15% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Deep burgundy primary - monastery wine */
+    --primary: 345 45% 25%;
+    --primary-foreground: 45 20% 97%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Warm stone secondary */
+    --secondary: 30 15% 85%;
+    --secondary-foreground: 25 15% 15%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Soft parchment muted */
+    --muted: 45 25% 92%;
+    --muted-foreground: 25 10% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Golden accent - monastery gold */
+    --accent: 45 65% 55%;
+    --accent-foreground: 25 15% 15%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 30 15% 85%;
+    --input: 30 15% 85%;
+    --ring: 345 45% 25%;
+
+    /* Heritage specific tokens */
+    --heritage-gold: 45 65% 55%;
+    --heritage-gold-light: 45 55% 75%;
+    --heritage-burgundy: 345 45% 25%;
+    --heritage-burgundy-light: 345 35% 45%;
+    --heritage-stone: 30 15% 75%;
+    --heritage-stone-light: 30 15% 85%;
+    --heritage-parchment: 45 25% 92%;
+    --heritage-cream: 45 20% 97%;
+
+    /* Gradients */
+    --gradient-heritage: linear-gradient(135deg, hsl(var(--heritage-burgundy)), hsl(var(--heritage-gold)));
+    --gradient-stone: linear-gradient(180deg, hsl(var(--heritage-stone-light)), hsl(var(--heritage-stone)));
+    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)), hsl(var(--heritage-parchment)));
+
+    /* Shadows */
+    --shadow-heritage: 0 8px 32px -8px hsl(var(--heritage-burgundy) / 0.2);
+    --shadow-gold: 0 4px 20px -4px hsl(var(--heritage-gold) / 0.3);
+    --shadow-soft: 0 2px 16px -4px hsl(var(--foreground) / 0.1);
 
     --radius: 0.5rem;
 
