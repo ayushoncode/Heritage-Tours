@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from "react";
-import { Camera, Scan, Info, Volume2, Download, Aperture, CheckCircle, XCircle } from "lucide-react";
+import { Camera, Scan, Info, Volume2, Download, Aperture, CheckCircle, XCircle, Play, Pause } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -46,22 +46,26 @@ const CameraMode = () => {
   const [isRecognized, setIsRecognized] = useState(false);
   const [isCapturing, setIsCapturing] = useState(false);
   const [capturedImage, setCapturedImage] = useState(null);
+  
+  // NEW STATE: Simulate audio playback control for the recognized artifact
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false); 
 
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
 
+  // --- MODIFIED ARTIFACT DATA FOR RUMTEK CONTEXT ---
   const recognizedArtifact = {
-    name: "Illuminated Book of Hours",
-    period: "14th Century",
+    name: "Ceremonial Thangka of the Lineage Gurus",
+    period: "Early 20th Century (Karma Kagyu)",
     confidence: "94%",
     description:
-      "This exquisite Book of Hours was created circa 1380 in the monastery's scriptorium. The gold leaf illuminations depict scenes from the life of St. Benedict, patron saint of Europe.",
-    audioLength: "3:45",
+      "This powerful Thangka, commissioned by the 16th Karmapa, is a central piece in Rumtek's main temple. It illustrates the primary lineage holders of the Karma Kagyu school of Tibetan Buddhism.",
+    audioLength: "4:15", 
     details: [
-      "Created by Brother Marcus of Padua",
-      "Contains 156 pages of vellum",
-      "Gold leaf and lapis lazuli pigments",
-      "Originally belonged to a noble patron",
+      "Depicts the lineage of the Karmapas",
+      "Features rich silk appliqué and gold embroidery",
+      "Consecrated by His Holiness the 16th Karmapa",
+      "Permanent collection of the **Rumtek Monastery**", // Directly linked to Rumtek
     ],
   };
 
@@ -98,10 +102,19 @@ const CameraMode = () => {
     // Simulate AI recognition
     setIsCapturing(true);
     setIsRecognized(false);
+    setIsAudioPlaying(false); // Stop audio if we capture a new image
+    
     setTimeout(() => {
       setIsCapturing(false);
       setIsRecognized(true);
     }, 1500);
+  };
+  
+  // --- Audio Control Handler ---
+  const toggleAudio = () => {
+      setIsAudioPlaying(prev => !prev);
+      // NOTE: In a real app, this would trigger a global audio context 
+      // to play the audio guide associated with the recognized artifact.
   };
 
   // --- Conditional Rendering ---
@@ -147,7 +160,10 @@ const CameraMode = () => {
       <div className="p-4">
         <Card className="mb-6 overflow-hidden shadow-soft">
           <div className="relative bg-black h-64 flex items-center justify-center">
-            <video ref={videoRef} autoPlay playsInline className="w-full h-64 object-cover rounded-lg" />
+            {/* The video stream is only rendered if permission is granted */}
+            {permissionStatus === 'granted' && (
+              <video ref={videoRef} autoPlay playsInline className="w-full h-64 object-cover rounded-lg" />
+            )}
             <canvas ref={canvasRef} className="hidden" />
             <div className="absolute inset-4 border-2 border-dashed border-heritage-gold rounded-lg"></div>
           </div>
@@ -216,8 +232,16 @@ const CameraMode = () => {
                       <Button variant="ghost" size="sm">
                         <Download className="h-4 w-4" />
                       </Button>
-                      <Button size="sm" className="bg-heritage-burgundy hover:bg-heritage-burgundy-light">
-                        Play
+                      <Button 
+                          size="sm" 
+                          className="bg-heritage-burgundy hover:bg-heritage-burgundy-light"
+                          onClick={toggleAudio} // Call the new toggle function
+                      >
+                          {isAudioPlaying ? (
+                              <><Pause className="h-4 w-4 mr-1" /> Stop</>
+                          ) : (
+                              <><Play className="h-4 w-4 mr-1" /> Play</>
+                          )}
                       </Button>
                     </div>
                   </div>
