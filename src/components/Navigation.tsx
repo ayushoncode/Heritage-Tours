@@ -1,8 +1,9 @@
 import React from "react";
-import { MapPin, Camera, Headphones, Users } from "lucide-react";
+import { MapPin, Camera, Headphones, Users, Home as HomeIcon } from "lucide-react";
 
 const Navigation = ({ activeTab, setActiveTab }) => {
   const tabs = [
+    { name: "home", icon: <HomeIcon />, label: "Home" },   // ✅ Added Home
     { name: "location", icon: <MapPin />, label: "Explore" },
     { name: "camera", icon: <Camera />, label: "Scan" },
     { name: "audio", icon: <Headphones />, label: "Audio" },
@@ -36,4 +37,3 @@ const Navigation = ({ activeTab, setActiveTab }) => {
 };
 
 export default Navigation;
-
