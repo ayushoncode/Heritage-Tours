@@ -91,7 +91,7 @@ const Home = ({ changeTab }) => {
         </div>
 
         {/* Quick Stats */}
-        <div className="absolute bottom-8 left-6 right-6">
+        <div className="absolute bottom-20 left-6 right-6">
           <div className="flex justify-center gap-8 text-white/80 font-semibold">
             <div className="text-center">
               <div className="text-2xl md:text-3xl font-bold text-white">
@@ -160,3 +160,4 @@ const Home = ({ changeTab }) => {
 };
 
 export default Home;
+
